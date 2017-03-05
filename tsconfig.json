@@ -1,9 +1,14 @@
 {
     "compileOnSave": true,
     "compilerOptions": {
-        "module": "es6",
+        "module": "umd",
         "declaration": true,
-        "sourceMap": true
+        "sourceMap": true,
+        "experimentalDecorators": true,
+        "outDir": "dist/amd",
+        "moduleResolution": "node",
+        "target": "es5",
+        "lib": ["es2017"]
     },
     "exclude": [
         "node_modules"
@@ -11,6 +16,7 @@
     "include": [
         "src/**/*.ts",
         "plugins/**/*.ts",
-        "storage/**/*.ts"
+        "storage/**/*.ts",
+        "test/**/*.ts"
     ]
 }

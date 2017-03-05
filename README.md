@@ -6,7 +6,7 @@ Storage abstraction for Typescript projects. **I have no idea how I want this to
 
 Everything you need to go to get up and running quickly.
 
-**Store.ts** is modeled after other data storage systems, exposing the following API. Each method returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
+**Store.ts** is modeled after other data storage systems, exposing the following API. By default, collections are stored in memory.
 
 ```javascript
 // Imagine we have the following basic data collection of users
@@ -18,13 +18,13 @@ let users = [new User({ "key": 0, "name": "Tom"}), new User({ "key": 1, "name": 
 let store = new Store<User>({ data: users });
 
 // Add a new user
-let key = await store.put({ "key": 2 "name": "Harry" });
+let key = store.put({ "key": 2 "name": "Harry" });
 
 // Get an existing user
-let harry = await store.get(key);
+let harry = store.get(key);
 
 // Update "Tom" to be "Steve"
-let key = await store.put({ "key": 0, "name": "Steve" });
+let key = store.put({ "key": 0, "name": "Steve" });
 
 // Loop over the entire collection
 store.forEach((user) => ({
@@ -32,7 +32,7 @@ store.forEach((user) => ({
 });
 
 // Get the entire collection as an array
-await store.fetch();
+store.fetch();
 
 // Remove an existing user
 store.delete();
@@ -44,6 +44,7 @@ store.clear();
 ## Installation
 
 using npm:
+
 ```javascript
 // Import the Store module
 import Store from 'store-ts';
@@ -63,16 +64,18 @@ store.put({ "name": "Harry" });
 # Plugins
 
 ## Track
+
 Returned objects give information about their location in the collection
 ## Query
+
 Client-side query functions
 
 ```javascript
 store.fetch().where(x => x.name == "Tom");
 ```
 
-## Sync
-Allow the use of syncronous methods
+## Async
+Each method returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) and are referred to by {name}Async to match the Microsoft nomenclature.
 ## Events
 Emit events on add, update, delete
 
