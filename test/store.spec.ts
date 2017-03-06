@@ -36,6 +36,6 @@ export class StoreTests {
     public GetTest() {
         const key = "0";
         const datum = this.store.get(key);
-        Expect(datum.value).toBe(this.updatedData.value);
+        Expect(datum).toEqual(this.updatedData);
     }
 }
