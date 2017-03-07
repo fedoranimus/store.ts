@@ -39,4 +39,8 @@ export default class Memory implements IStorage {
         delete this.storage[key];
         return datum;
     }
+
+    public reset() {
+        this.storage = {};
+    }
 }

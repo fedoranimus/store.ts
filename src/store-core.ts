@@ -75,20 +75,20 @@ export default class Store<T> {
     //     //return new Collection<T>(this.storage.readAll());
     // }
 
-    public remove(): T {
-        throw new Error('Not Implemented');
+    public remove(key: string): T {
+        return this.deserialize(this.storage.delete(key));
     }
 
     public clear() {
-        throw new Error('Not Implemented');
+        this.storage.reset();
     }
 
     private serialize(data: T): string {
         return JSON.stringify(data);
     }
 
-    private deserialize(stringValue: string, defaultValue: T = null): T {
-        let value = null;
+    private deserialize(stringValue: string, defaultValue: T = undefined): T {
+        let value = undefined;
         try {
             value = JSON.parse(stringValue);
         } catch(e) {
